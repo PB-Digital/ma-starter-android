@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id "androidx.navigation.safeargs.kotlin"
+}
+
+android {
+    compileSdk androidCompileSdk
+
+    defaultConfig {
+        minSdk androidMinSdk
+        targetSdk androidTargetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+    namespace 'az.pashabank.starter.presentation'
+}
+
+dependencies {
+    implementation project(":domain")
+
+    //Core
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation "androidx.fragment:fragment-ktx:1.5.6"
+    implementation "androidx.activity:activity-ktx:1.7.0"
+
+    //Material
+    implementation 'com.google.android.material:material:1.8.0'
+
+    // Lifecycle extensions
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+
+    //Constraint
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // shimmer loading effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //View pager
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    //DI
+    implementation "io.insert-koin:koin-android:${koinVersion}"
+    implementation "io.insert-koin:koin-androidx-viewmodel:${koinVersion}"
+
+    // Logger
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    testImplementation "junit:junit:${jUnitVersion}"
+
+    // swipe refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    implementation 'com.google.guava:guava:27.0.1-android'
+
+    // image loader
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+}

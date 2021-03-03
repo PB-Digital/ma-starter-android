@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_graph"
+    app:startDestination="@id/splash_fragment">
+
+    <fragment
+        android:id="@+id/splash_fragment"
+        android:name="az.pashabank.presentation.flow.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/toLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="az.pashabank.presentation.flow.main.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="az.pashabank.presentation.flow.main.content.MainPageFragment"
+        android:label="MainPageFragment"
+        tools:layout="@layout/fragment_main_page" />
+
+</navigation>
