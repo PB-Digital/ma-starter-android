@@ -32,13 +32,13 @@ dependencies {
     implementation project(":domain")
 
     //Core
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation "androidx.fragment:fragment-ktx:1.5.6"
-    implementation "androidx.activity:activity-ktx:1.7.0"
+    implementation "androidx.fragment:fragment-ktx:1.6.2"
+    implementation "androidx.activity:activity-ktx:1.8.2"
 
     //Material
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.11.0'
 
     // Lifecycle extensions
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -65,7 +65,7 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-viewmodel:${koinVersion}"
 
     // Logger
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.jakewharton.timber:timber:${timberVersion}"
 
     testImplementation "junit:junit:${jUnitVersion}"
 
@@ -75,7 +75,7 @@ dependencies {
     implementation 'com.google.guava:guava:27.0.1-android'
 
     // image loader
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
