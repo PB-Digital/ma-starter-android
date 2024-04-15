@@ -21,3 +21,7 @@ Android application starter project
 * [Mockito](http://site.mockito.org/)
 * [Espresso](https://developer.android.com/training/testing/espresso/index.html)
 * A single-activity architecture, using the **[Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started)** to manage fragment operations.
+
+## Test user credentials
+- Email: "test@test.com"
+- Password: "test123321"

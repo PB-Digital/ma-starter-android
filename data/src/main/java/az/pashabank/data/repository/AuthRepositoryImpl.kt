@@ -5,7 +5,7 @@ import az.pashabank.domain.repository.AuthRepository
 class AuthRepositoryImpl : AuthRepository {
 
     companion object {
-        private const val EXPECTED_EMAIL = "test@gmail.com"
+        private const val EXPECTED_EMAIL = "test@test.com"
         private const val EXPECTED_PASSWORD = "test123321"
     }
 

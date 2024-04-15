@@ -1,7 +1,6 @@
 package az.pashabank.data.di
 
 import androidx.room.Room
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import az.pashabank.data.errors.RemoteErrorMapper
 import az.pashabank.data.local.card.CardDatabase
 import az.pashabank.data.local.card.CardLocalDataSource
@@ -32,6 +31,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlin.coroutines.CoroutineContext
 
 val dataModule = module {
@@ -69,7 +69,7 @@ val dataModule = module {
         Retrofit.Builder()
             .client(get())
             .baseUrl(getProperty("host"))
-            .addConverterFactory(get<Json>().asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(get<Json>().asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .build()
     }
 
