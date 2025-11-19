@@ -12,8 +12,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-include ':presentation'
-include ':domain'
-include ':data'
-include ':app'
+include(":presentation")
+include(":domain")
+include(":data")
+include(":app")
 rootProject.name = "ma-starter-android"

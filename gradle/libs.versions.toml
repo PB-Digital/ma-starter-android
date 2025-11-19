@@ -1,0 +1,106 @@
+[versions]
+# SDK Versions
+androidMinSdk = "24"
+androidCompileSdk = "36"
+androidBuildTools = "30.0.3"
+
+# Plugin Versions
+androidGradlePlugin = "8.10.1"
+kotlin = "2.2.20"
+ksp = "2.2.20-2.0.4"
+
+# Library Versions
+koin = "4.1.1"
+room = "2.8.3"
+coroutine = "1.10.2"
+navigation = "2.9.6"
+lifecycle = "2.9.4"
+timber = "5.0.1"
+jUnit = "4.13.2"
+coreKtx = "1.17.0"
+appcompat = "1.6.1"
+annotation = "1.9.1"
+fragment = "1.6.2"
+activity = "1.8.2"
+material = "1.11.0"
+constraintLayout = "2.1.4"
+viewPager2 = "1.0.0"
+swipeRefreshLayout = "1.1.0"
+shimmer = "0.5.0"
+guava = "33.5.0-android"
+glide = "5.0.5"
+kotlinxSerializationJson = "1.9.0"
+okhttp = "4.12.0"
+retrofit = "3.0.0"
+securityCrypto = "1.1.0-alpha06"
+espressoCore = "3.7.0"
+androidTestRules = "1.0.2"
+androidxTest = "1.5.0"
+cucumberAndroid = "4.10.0"
+
+[libraries]
+# Kotlin
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+# AndroidX Core
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+# Material
+material = { module = "com.google.android.material:material", version.ref = "material" }
+# Lifecycle
+androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version = "2.2.0" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle" }
+# ConstraintLayout
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+# Navigation
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+# ViewPager2
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewPager2" }
+# SwipeRefreshLayout
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshLayout" }
+# Room
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+# Security
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
+# Koin
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+# Coroutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
+# Serialization
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+# Network
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
+# UI Libraries
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+# Logger
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+# Testing
+junit = { module = "junit:junit", version.ref = "jUnit" }
+android-test-rules = { module = "com.android.support.test:rules", version.ref = "androidTestRules" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidxTest" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxTest" }
+androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+cucumber-android = { module = "io.cucumber:cucumber-android", version.ref = "cucumberAndroid" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

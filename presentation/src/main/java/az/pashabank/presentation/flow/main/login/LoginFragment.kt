@@ -6,12 +6,11 @@ import androidx.navigation.fragment.findNavController
 import az.pashabank.starter.presentation.R
 import az.pashabank.starter.presentation.databinding.FragmentLoginBinding
 import az.pashabank.presentation.base.BaseFragment
-import kotlin.reflect.KClass
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment<Nothing, LoginEffect, LoginViewModel, FragmentLoginBinding>() {
 
-    override val vmClazz: KClass<LoginViewModel>
-        get() = LoginViewModel::class
+    override val viewModel by viewModel<LoginViewModel>()
     override val bindingCallback: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
     override val screenName: String

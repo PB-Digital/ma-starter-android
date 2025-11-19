@@ -28,18 +28,14 @@ import az.pashabank.starter.presentation.R
 import az.pashabank.presentation.common.LogoutHandler
 import az.pashabank.presentation.flow.main.MainActivity
 import az.pashabank.presentation.tools.NavigationCommand
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.core.parameter.parametersOf
-import kotlin.reflect.KClass
 
 abstract class BaseFragment<State, Effect, ViewModel : BaseViewModel<State, Effect>, B : ViewBinding> :
     Fragment(), LifecycleOwner {
 
-    protected abstract val vmClazz: KClass<ViewModel>
     protected abstract val bindingCallback: (LayoutInflater, ViewGroup?, Boolean) -> B
     protected abstract val screenName: String
 
-    val viewModel: ViewModel by lazy { getViewModel(vmClazz) { parametersOf(arguments) } }
+    abstract val viewModel: ViewModel
 
     protected lateinit var binding: B
 

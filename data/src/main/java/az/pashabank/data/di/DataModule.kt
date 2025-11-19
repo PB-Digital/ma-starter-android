@@ -43,7 +43,7 @@ val dataModule = module {
     single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(
-            if (getProperty("isDebug") == true.toString()) HttpLoggingInterceptor.Level.BODY
+            if (this.getProperty<String>("isDebug") == true.toString()) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         )
     }
@@ -68,7 +68,7 @@ val dataModule = module {
     single<Retrofit> {
         Retrofit.Builder()
             .client(get())
-            .baseUrl(getProperty("host"))
+            .baseUrl(getProperty<String>("host"))
             .addConverterFactory(get<Json>().asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .build()
     }
