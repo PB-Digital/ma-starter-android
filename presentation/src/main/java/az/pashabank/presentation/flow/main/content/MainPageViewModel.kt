@@ -2,15 +2,15 @@ package az.pashabank.presentation.flow.main.content
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import az.pashabank.domain.model.customer.Card
-import az.pashabank.domain.model.customer.Customer
-import az.pashabank.domain.model.customer.Transaction
-import az.pashabank.domain.usecase.card.ObserveCardsUseCase
-import az.pashabank.domain.usecase.card.SyncCardsUseCase
-import az.pashabank.domain.usecase.customer.ObserveCustomerUseCase
-import az.pashabank.domain.usecase.customer.SyncCustomersUseCase
-import az.pashabank.domain.usecase.transaction.ObserveTransactionsUseCase
-import az.pashabank.domain.usecase.transaction.SyncTransactionsUseCase
+import az.pashabank.starter.domain.model.customer.Card
+import az.pashabank.starter.domain.model.customer.Customer
+import az.pashabank.starter.domain.model.customer.Transaction
+import az.pashabank.starter.domain.usecase.card.ObserveCardsUseCase
+import az.pashabank.starter.domain.usecase.card.SyncCardsUseCase
+import az.pashabank.starter.domain.usecase.customer.ObserveCustomerUseCase
+import az.pashabank.starter.domain.usecase.customer.SyncCustomersUseCase
+import az.pashabank.starter.domain.usecase.transaction.ObserveTransactionsUseCase
+import az.pashabank.starter.domain.usecase.transaction.SyncTransactionsUseCase
 import az.pashabank.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
@@ -22,7 +22,7 @@ class MainPageViewModel(
     observeCardsUseCase: ObserveCardsUseCase,
     private val syncCardsUseCase: SyncCardsUseCase,
     private val observeTransactionsUseCase: ObserveTransactionsUseCase,
-    private val syncTransactionsUseCase: SyncTransactionsUseCase
+    private val syncTransactionsUseCase: SyncTransactionsUseCase,
 ) : BaseViewModel<MainPageState, Nothing>() {
 
     private val _customer = MutableLiveData<Customer>()
@@ -66,9 +66,12 @@ class MainPageViewModel(
     }
 
     private fun loadCards() {
-        syncCardsUseCase.launch(Unit, loadingHandle = {
-            _cardSyncLoading.postValue(it)
-        })
+        syncCardsUseCase.launch(
+            param = Unit,
+            loadingHandle = {
+                _cardSyncLoading.postValue(it)
+            }
+        )
     }
 
     private fun observeTransactions(cardId: String) {
@@ -84,11 +87,11 @@ class MainPageViewModel(
 
     private fun loadTransactions(cardId: String) {
         syncTransactionsUseCase.launch(
-            SyncTransactionsUseCase.Param(cardId),
+            param = SyncTransactionsUseCase.Param(cardId),
             loadingHandle = {
                 _isTransactionLoading.postValue(it)
-            }) {
-        }
+            }
+        )
     }
 
     fun setActiveCard(card: Card) {

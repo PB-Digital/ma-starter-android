@@ -24,17 +24,17 @@ android {
     namespace = "az.pashabank.starter.data"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
-        jvmToolchain(21)
+        jvmToolchain(17)
     }
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(":shared"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.annotation)
@@ -49,11 +49,13 @@ dependencies {
     // Json serialization
     implementation(libs.kotlinx.serialization.json)
 
-    // Net client
-    implementation(libs.okhttp)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
-    implementation(libs.okhttp.logging)
+    // Net client - Ktor
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.auth)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.serialization.json)
 
     // encrypted preferences
     implementation(libs.androidx.security.crypto)
@@ -67,4 +69,7 @@ dependencies {
 
     // Logger
     implementation(libs.timber)
+
+    // Date
+    implementation(libs.kotlinx.datetime)
 }

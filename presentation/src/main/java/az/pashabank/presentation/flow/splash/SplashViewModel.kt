@@ -1,7 +1,7 @@
 package az.pashabank.presentation.flow.splash
 
-import az.pashabank.domain.usecase.splash.SplashStatus
-import az.pashabank.domain.usecase.splash.SplashUseCase
+import az.pashabank.starter.domain.usecase.splash.SplashStatus
+import az.pashabank.starter.domain.usecase.splash.SplashUseCase
 import az.pashabank.presentation.base.BaseViewModel
 
 class SplashViewModel(

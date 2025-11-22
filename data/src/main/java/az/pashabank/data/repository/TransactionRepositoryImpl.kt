@@ -1,17 +1,17 @@
 package az.pashabank.data.repository
 
-import az.pashabank.data.local.customer.CustomerLocalDataSource
-import az.pashabank.data.local.transaction.TransactionLocalDataSource
+import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
+import az.pashabank.starter.data.local.transaction.TransactionLocalDataSource
 import az.pashabank.data.mapper.toDomain
 import az.pashabank.data.mapper.toLocal
-import az.pashabank.data.remote.TransactionApi
-import az.pashabank.domain.model.customer.Transaction
-import az.pashabank.domain.repository.TransactionRepository
+import az.pashabank.data.remote.TransactionApiService
+import az.pashabank.starter.domain.model.customer.Transaction
+import az.pashabank.starter.domain.repository.TransactionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TransactionRepositoryImpl(
-    private val api: TransactionApi,
+    private val api: TransactionApiService,
     private val transactionLocalDataSource: TransactionLocalDataSource,
     private val customerLocalDataSource: CustomerLocalDataSource
 ) : TransactionRepository {

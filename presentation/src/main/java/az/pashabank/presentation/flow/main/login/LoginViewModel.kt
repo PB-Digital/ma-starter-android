@@ -1,6 +1,6 @@
 package az.pashabank.presentation.flow.main.login
 
-import az.pashabank.domain.usecase.login.LoginUseCase
+import az.pashabank.starter.domain.usecase.login.LoginUseCase
 import az.pashabank.presentation.base.BaseViewModel
 import az.pashabank.presentation.extensions.isValidEmail
 

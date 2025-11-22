@@ -2,7 +2,7 @@ package az.pashabank.presentation.base
 
 import android.content.Context
 import android.content.res.Configuration
-import az.pashabank.domain.repository.AppSettingsDataSource
+import az.pashabank.starter.domain.repository.AppSettingsDataSource
 import java.util.*
 
 

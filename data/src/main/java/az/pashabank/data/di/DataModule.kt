@@ -1,37 +1,43 @@
 package az.pashabank.data.di
 
-import androidx.room.Room
 import az.pashabank.data.errors.RemoteErrorMapper
-import az.pashabank.data.local.card.CardDatabase
-import az.pashabank.data.local.card.CardLocalDataSource
-import az.pashabank.data.local.card.CardLocalDataSourceImpl
-import az.pashabank.data.local.customer.CustomerDatabase
-import az.pashabank.data.local.customer.CustomerLocalDataSource
-import az.pashabank.data.local.customer.CustomerLocalDataSourceImpl
 import az.pashabank.data.local.settings.AppPreferences
 import az.pashabank.data.local.settings.AppSettings
 import az.pashabank.data.local.settings.AppSettingsDataSourceImpl
-import az.pashabank.data.local.transaction.TransactionDatabase
-import az.pashabank.data.local.transaction.TransactionLocalDataSource
-import az.pashabank.data.local.transaction.TransactionLocalDataSourceImpl
-import az.pashabank.data.remote.CardApi
-import az.pashabank.data.remote.CustomerApi
-import az.pashabank.data.remote.TransactionApi
-import az.pashabank.data.repository.*
-import az.pashabank.domain.di.ERROR_MAPPER_NETWORK
-import az.pashabank.domain.di.IO_CONTEXT
-import az.pashabank.domain.exceptions.ErrorMapper
-import az.pashabank.domain.repository.*
+import az.pashabank.data.remote.CardApiService
+import az.pashabank.data.remote.CustomerApiService
+import az.pashabank.data.remote.TransactionApiService
+import az.pashabank.data.repository.AuthRepositoryImpl
+import az.pashabank.data.repository.CardRepositoryImpl
+import az.pashabank.data.repository.CustomerRepositoryImpl
+import az.pashabank.data.repository.ErrorConverterRepositoryImpl
+import az.pashabank.data.repository.TransactionRepositoryImpl
+import az.pashabank.starter.data.local.card.CardLocalDataSource
+import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
+import az.pashabank.starter.data.local.transaction.TransactionLocalDataSource
+import az.pashabank.starter.domain.di.ERROR_MAPPER_NETWORK
+import az.pashabank.starter.domain.di.IO_CONTEXT
+import az.pashabank.starter.domain.exceptions.ErrorMapper
+import az.pashabank.starter.domain.repository.AppSettingsDataSource
+import az.pashabank.starter.domain.repository.AuthRepository
+import az.pashabank.starter.domain.repository.CardRepository
+import az.pashabank.starter.domain.repository.CustomerRepository
+import az.pashabank.starter.domain.repository.ErrorConverterRepository
+import az.pashabank.starter.domain.repository.TransactionRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 val dataModule = module {
@@ -39,22 +45,6 @@ val dataModule = module {
     single<CoroutineContext>(named(IO_CONTEXT)) { Dispatchers.IO }
 
     //////////////////////////////////// NETWORK ////////////////////////////////////
-
-    single {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(
-            if (this.getProperty<String>("isDebug") == true.toString()) HttpLoggingInterceptor.Level.BODY
-            else HttpLoggingInterceptor.Level.NONE
-        )
-    }
-
-    single {
-        val builder = OkHttpClient.Builder()
-            .addInterceptor(get<HttpLoggingInterceptor>())
-
-        builder.build()
-    }
-
 
     single {
         Json {
@@ -65,17 +55,37 @@ val dataModule = module {
         }
     }
 
-    single<Retrofit> {
-        Retrofit.Builder()
-            .client(get())
-            .baseUrl(getProperty<String>("host"))
-            .addConverterFactory(get<Json>().asConverterFactory("application/json; charset=UTF8".toMediaType()))
-            .build()
+    single<HttpClient> {
+        HttpClient(OkHttp) {
+            // Install Content Negotiation for JSON
+            install(ContentNegotiation) {
+                json(get<Json>())
+            }
+
+            // Install Logging
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Timber.tag("Ktor").d(message)
+                    }
+                }
+                level = if (getProperty<String>("isDebug") == true.toString()) {
+                    LogLevel.ALL
+                } else {
+                    LogLevel.NONE
+                }
+            }
+
+            // Default request configuration
+            defaultRequest {
+                url(getProperty<String>("host"))
+            }
+        }
     }
 
-    factory<CustomerApi> { get<Retrofit>().create(CustomerApi::class.java) }
-    factory<CardApi> { get<Retrofit>().create(CardApi::class.java) }
-    factory<TransactionApi> { get<Retrofit>().create(TransactionApi::class.java) }
+    factory<CustomerApiService> { CustomerApiService(get()) }
+    factory<CardApiService> { CardApiService(get()) }
+    factory<TransactionApiService> { TransactionApiService(get()) }
 
 
     //////////////////////////////////// REPOSITORY ////////////////////////////////////
@@ -94,16 +104,16 @@ val dataModule = module {
 
     factory<CustomerRepository> {
         CustomerRepositoryImpl(
-            api = get(),
-            customerLocalDataSource = get()
+            api = get<CustomerApiService>(),
+            customerLocalDataSource = get<CustomerLocalDataSource>()
         )
     }
 
     factory<CardRepository> {
         CardRepositoryImpl(
-            api = get(),
-            customerLocalDataSource = get(),
-            cardLocalDataSource = get()
+            api = get<CardApiService>(),
+            customerLocalDataSource = get<CustomerLocalDataSource>(),
+            cardLocalDataSource = get<CardLocalDataSource>()
         )
     }
 
@@ -113,66 +123,14 @@ val dataModule = module {
 
     factory<TransactionRepository> {
         TransactionRepositoryImpl(
-            api = get(),
-            customerLocalDataSource = get(),
-            transactionLocalDataSource = get()
+            api = get<TransactionApiService>(),
+            customerLocalDataSource = get<CustomerLocalDataSource>(),
+            transactionLocalDataSource = get<TransactionLocalDataSource>()
         )
     }
 
     //////////////////////////////////// LOCAL ////////////////////////////////////
     factory<AppSettings> { AppPreferences(context = androidContext()) }
-
-    single<CustomerLocalDataSource> {
-        CustomerLocalDataSourceImpl(
-            customerDao = get()
-        )
-    }
-
-    single<CardLocalDataSource> {
-        CardLocalDataSourceImpl(
-            cardDao = get()
-        )
-    }
-
-    single<TransactionLocalDataSource> {
-        TransactionLocalDataSourceImpl(
-            transactionDao = get()
-        )
-    }
-
-    single { get<CustomerDatabase>().customerDao() }
-    single { get<CardDatabase>().cardDao() }
-    single { get<TransactionDatabase>().transactionDao() }
-
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            CustomerDatabase::class.java,
-            "customer-db"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            CardDatabase::class.java,
-            "card-db"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            TransactionDatabase::class.java,
-            "transaction-db"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
 
     //////////////////////////////////// ERROR MAPPER ////////////////////////////////////
     factory<ErrorMapper>(named(ERROR_MAPPER_NETWORK)) { RemoteErrorMapper() }

@@ -1,19 +1,24 @@
+@file:OptIn(ExperimentalTime::class, FormatStringsInDatetimeFormats::class)
+
 package az.pashabank.presentation.extensions
 
-import java.text.SimpleDateFormat
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.datetime.toLocalDateTime
 import java.util.*
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
-fun Date.getFormattedText(langCode: String = Locale.ENGLISH.toLanguageTag()): String {
-    val inputDate = Calendar.getInstance()
-    inputDate.time = this
+fun LocalDateTime.getFormattedText(langCode: String = Locale.ENGLISH.toLanguageTag()): String {
 
-    val inputYear = inputDate.get(Calendar.YEAR)
-    val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+    val inputYear = this.year
+    val currentYear = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year
 
-    val sdf =
-        SimpleDateFormat(
-            if (inputYear == currentYear) "dd MMMM, HH:mm" else "dd MMMM yyyy",
-            Locale(langCode)
-        )
-    return sdf.format(this).capitalizeFirstLetter(Locale(langCode))
+    val formatPattern = if (inputYear == currentYear) "dd MM, HH:mm" else "dd MM yyyy"
+    val format = LocalDateTime.Format { byUnicodePattern(formatPattern) }
+
+    return this.format(format).capitalizeFirstLetter(Locale(langCode))
 }

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -36,19 +38,19 @@ android {
     }
     namespace = "az.pashabank.starter"
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-    kotlinOptions {
-        jvmTarget = "21"
+    kotlin {
+        jvmToolchain(17)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
 }
 
 dependencies {
     implementation(project(":data"))
-    implementation(project(":domain"))
     implementation(project(":presentation"))
+    implementation(project(":shared"))
+
 
     //DI
     implementation(libs.koin.android)

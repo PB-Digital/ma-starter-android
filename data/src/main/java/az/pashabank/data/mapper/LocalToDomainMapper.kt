@@ -1,13 +1,13 @@
 package az.pashabank.data.mapper
 
 import az.pashabank.data.extensions.getDate
-import az.pashabank.data.local.card.model.CardLocalDto
-import az.pashabank.data.local.customer.model.CustomerLocalDto
-import az.pashabank.data.local.transaction.model.TransactionLocalDto
-import az.pashabank.domain.model.customer.*
-import az.pashabank.domain.model.customer.Currency
-import java.math.BigDecimal
-import java.util.*
+import az.pashabank.starter.data.local.card.model.CardLocalDto
+import az.pashabank.starter.data.local.customer.model.CustomerLocalDto
+import az.pashabank.starter.data.local.transaction.model.TransactionLocalDto
+import az.pashabank.starter.domain.model.customer.*
+import az.pashabank.starter.domain.model.customer.Card
+import az.pashabank.starter.domain.model.customer.Currency
+import az.pashabank.starter.domain.model.customer.Customer
 
 fun CustomerLocalDto.toDomain() = Customer(
     id = id,
@@ -22,11 +22,7 @@ fun CardLocalDto.toDomain() = Card(
     currency = Currency.valueOf(currency),
     status = ECardStatus.getCardStatus(status),
     type = ECardType.getCardType(type),
-    balance = try {
-        BigDecimal(balance)
-    } catch (e: NumberFormatException) {
-        BigDecimal.ZERO
-    },
+    balance = balance.toDoubleOrNull() ?: 0.0,
     pan = pan,
     createdAt = createdAt
 )
@@ -36,7 +32,7 @@ fun TransactionLocalDto.toDomain() = Transaction(
     cardId = cardId,
     category = ETransactionCategory.getCategory(category),
     title = title,
-    createdAt = createdAt.getDate("yyyy-MM-dd'T'HH:mm:ss") ?: Date(),
+    createdAt = createdAt.getDate() ,
     amount = amount,
     currency = currency
 )

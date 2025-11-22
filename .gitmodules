@@ -1,0 +1,4 @@
+[submodule "shared"]
+	path = shared
+	url = git@github.com:UlvIsmayilov/ma-starter-kmp.git
+	branch = main

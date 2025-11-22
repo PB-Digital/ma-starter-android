@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
-import az.pashabank.starter.presentation.databinding.FragmentMainPageBinding
-import az.pashabank.domain.model.customer.Card
 import az.pashabank.presentation.base.BaseFragment
 import az.pashabank.presentation.extensions.gone
 import az.pashabank.presentation.extensions.invisible
@@ -13,6 +11,8 @@ import az.pashabank.presentation.extensions.visible
 import az.pashabank.presentation.flow.main.content.adapters.CardsPageAdapter
 import az.pashabank.presentation.flow.main.content.adapters.TransactionsAdapter
 import az.pashabank.presentation.tools.Utils
+import az.pashabank.starter.domain.model.customer.Card
+import az.pashabank.starter.presentation.databinding.FragmentMainPageBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainPageFragment : BaseFragment<MainPageState, Nothing, MainPageViewModel, FragmentMainPageBinding>() {

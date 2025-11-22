@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import az.pashabank.starter.presentation.databinding.ListItemTransactionBinding
-import az.pashabank.domain.model.customer.Transaction
+import az.pashabank.starter.domain.model.customer.Transaction
 import az.pashabank.presentation.extensions.*
 import az.pashabank.presentation.tools.ShimmerLoaderAdapter
 

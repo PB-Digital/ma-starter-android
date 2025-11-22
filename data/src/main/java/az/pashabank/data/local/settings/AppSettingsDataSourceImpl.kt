@@ -1,7 +1,7 @@
 package az.pashabank.data.local.settings
 
-import az.pashabank.domain.constant.AppLanguage
-import az.pashabank.domain.repository.AppSettingsDataSource
+import az.pashabank.starter.domain.constant.AppLanguage
+import az.pashabank.starter.domain.repository.AppSettingsDataSource
 import kotlinx.coroutines.flow.Flow
 
 class AppSettingsDataSourceImpl(

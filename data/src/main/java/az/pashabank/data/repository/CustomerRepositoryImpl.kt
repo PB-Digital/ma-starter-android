@@ -1,16 +1,16 @@
 package az.pashabank.data.repository
 
-import az.pashabank.data.local.customer.CustomerLocalDataSource
+import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
 import az.pashabank.data.mapper.toDomain
 import az.pashabank.data.mapper.toLocal
-import az.pashabank.data.remote.CustomerApi
-import az.pashabank.domain.model.customer.Customer
-import az.pashabank.domain.repository.CustomerRepository
+import az.pashabank.data.remote.CustomerApiService
+import az.pashabank.starter.domain.model.customer.Customer
+import az.pashabank.starter.domain.repository.CustomerRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class CustomerRepositoryImpl(
-    private val api: CustomerApi,
+    private val api: CustomerApiService,
     private val customerLocalDataSource: CustomerLocalDataSource
 ) : CustomerRepository {
 

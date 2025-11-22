@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import az.pashabank.starter.domain.model.customer.Card
+import az.pashabank.starter.domain.model.customer.ECardType
 import az.pashabank.starter.presentation.R
 import az.pashabank.starter.presentation.databinding.ListCardItemBinding
-import az.pashabank.domain.model.customer.Card
-import az.pashabank.domain.model.customer.ECardType
 
 class CardsPageAdapter(val select: (Card) -> Unit) :
     RecyclerView.Adapter<CardsPageAdapter.ViewHolder>() {

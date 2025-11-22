@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import az.pashabank.data.local.base.BasePreferences
-import az.pashabank.domain.constant.AppLanguage
-import az.pashabank.domain.constant.toAppLanguage
+import az.pashabank.starter.domain.constant.AppLanguage
+import az.pashabank.starter.domain.constant.toAppLanguage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

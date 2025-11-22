@@ -95,3 +95,4 @@ CODEOWNERS
 
 #kover coverage reports
 /kover-reports
+.kotlin/

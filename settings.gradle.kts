@@ -13,7 +13,8 @@ dependencyResolutionManagement {
     }
 }
 include(":presentation")
-include(":domain")
 include(":data")
 include(":app")
+include(":shared")
+project(":shared").projectDir = file("shared/shared")
 rootProject.name = "ma-starter-android"

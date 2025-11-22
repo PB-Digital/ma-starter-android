@@ -1,6 +1,7 @@
 package az.pashabank.data.repository
 
-import az.pashabank.domain.repository.AuthRepository
+import az.pashabank.starter.domain.repository.AuthRepository
+
 
 class AuthRepositoryImpl : AuthRepository {
 

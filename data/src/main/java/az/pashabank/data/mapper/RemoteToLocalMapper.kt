@@ -1,8 +1,8 @@
 package az.pashabank.data.mapper
 
-import az.pashabank.data.local.card.model.CardLocalDto
-import az.pashabank.data.local.customer.model.CustomerLocalDto
-import az.pashabank.data.local.transaction.model.TransactionLocalDto
+import az.pashabank.starter.data.local.card.model.CardLocalDto
+import az.pashabank.starter.data.local.customer.model.CustomerLocalDto
+import az.pashabank.starter.data.local.transaction.model.TransactionLocalDto
 import az.pashabank.data.remote.model.card.CardRemoteDto
 import az.pashabank.data.remote.model.customer.CustomerRemoteDto
 import az.pashabank.data.remote.model.transaction.TransactionRemoteDto
