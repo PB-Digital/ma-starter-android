@@ -4,7 +4,7 @@ import az.pashabank.starter.data.local.card.CardLocalDataSource
 import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
 import az.pashabank.data.mapper.toDomain
 import az.pashabank.data.mapper.toLocal
-import az.pashabank.data.remote.CardApiService
+import az.pashabank.starter.data.remote.CardApiService
 import az.pashabank.starter.domain.model.customer.Card
 import az.pashabank.starter.domain.repository.CardRepository
 import kotlinx.coroutines.flow.Flow

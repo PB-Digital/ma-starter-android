@@ -3,7 +3,7 @@ package az.pashabank.data.repository
 import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
 import az.pashabank.data.mapper.toDomain
 import az.pashabank.data.mapper.toLocal
-import az.pashabank.data.remote.CustomerApiService
+import az.pashabank.starter.data.remote.CustomerApiService
 import az.pashabank.starter.domain.model.customer.Customer
 import az.pashabank.starter.domain.repository.CustomerRepository
 import kotlinx.coroutines.flow.Flow

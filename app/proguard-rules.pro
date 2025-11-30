@@ -40,7 +40,7 @@
     kotlinx.serialization.KSerializer serializer(...);
 }
 
--keep class az.pashabank.data.errors.RemoteErrors { *; }
+-keep class az.pashabank.starter.data.remote.error.RemoteErrors { *; }
 
 
 # ---------------- Network ------------------

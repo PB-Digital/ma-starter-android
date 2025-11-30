@@ -1,6 +1,6 @@
 package az.pashabank.data.mapper
 
-import az.pashabank.data.extensions.getDate
+import az.pashabank.starter.data.extensions.getDate
 import az.pashabank.starter.data.local.card.model.CardLocalDto
 import az.pashabank.starter.data.local.customer.model.CustomerLocalDto
 import az.pashabank.starter.data.local.transaction.model.TransactionLocalDto

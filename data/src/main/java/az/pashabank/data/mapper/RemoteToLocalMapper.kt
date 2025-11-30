@@ -3,9 +3,9 @@ package az.pashabank.data.mapper
 import az.pashabank.starter.data.local.card.model.CardLocalDto
 import az.pashabank.starter.data.local.customer.model.CustomerLocalDto
 import az.pashabank.starter.data.local.transaction.model.TransactionLocalDto
-import az.pashabank.data.remote.model.card.CardRemoteDto
-import az.pashabank.data.remote.model.customer.CustomerRemoteDto
-import az.pashabank.data.remote.model.transaction.TransactionRemoteDto
+import az.pashabank.starter.data.remote.model.card.CardRemoteDto
+import az.pashabank.starter.data.remote.model.customer.CustomerRemoteDto
+import az.pashabank.starter.data.remote.model.transaction.TransactionRemoteDto
 
 fun CustomerRemoteDto.toLocal() = CustomerLocalDto(
     id = id,

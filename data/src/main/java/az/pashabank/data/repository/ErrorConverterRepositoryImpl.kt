@@ -1,6 +1,6 @@
 package az.pashabank.data.repository
 
-import az.pashabank.data.remote.error.ServerProblemDescription
+import az.pashabank.starter.data.remote.error.ServerProblemDescription
 import az.pashabank.starter.domain.repository.ErrorConverterRepository
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.statement.HttpResponse

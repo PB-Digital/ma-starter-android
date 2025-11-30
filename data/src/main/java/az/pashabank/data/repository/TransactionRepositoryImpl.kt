@@ -4,7 +4,7 @@ import az.pashabank.starter.data.local.customer.CustomerLocalDataSource
 import az.pashabank.starter.data.local.transaction.TransactionLocalDataSource
 import az.pashabank.data.mapper.toDomain
 import az.pashabank.data.mapper.toLocal
-import az.pashabank.data.remote.TransactionApiService
+import az.pashabank.starter.data.remote.TransactionApiService
 import az.pashabank.starter.domain.model.customer.Transaction
 import az.pashabank.starter.domain.repository.TransactionRepository
 import kotlinx.coroutines.flow.Flow

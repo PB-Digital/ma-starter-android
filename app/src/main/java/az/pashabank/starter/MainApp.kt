@@ -20,7 +20,7 @@ open class MainApp : Application() {
             androidContext(androidContext = this@MainApp)
             properties(
                 mapOf(
-                    "host" to "https://6214983b89fad53b1f18329c.mockapi.io/",
+                    "host" to "6214983b89fad53b1f18329c.mockapi.io/",
                     "isDebug" to (BuildConfig.DEBUG || BuildConfig.VERSION_NAME.contains("-dev")).toString(),
                 )
             )
