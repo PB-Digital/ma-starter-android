@@ -47,7 +47,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
     implementation(project(":presentation"))
     implementation(project(":shared"))
 

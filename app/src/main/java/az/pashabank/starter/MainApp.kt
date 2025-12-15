@@ -2,6 +2,7 @@ package az.pashabank.starter
 
 import android.annotation.SuppressLint
 import android.app.Application
+import az.pashabank.presentation.base.LanguageContextWrapper
 import az.pashabank.starter.appinitializers.AppInitializers
 import az.pashabank.starter.di.appComponent
 import org.koin.core.context.startKoin
@@ -11,6 +12,7 @@ import org.koin.android.ext.koin.androidContext
 open class MainApp : Application() {
 
     private val initializers: AppInitializers by inject()
+    private val languageWrapper: LanguageContextWrapper by inject()
 
     @SuppressLint("HardwareIds")
     override fun onCreate() {
@@ -26,6 +28,9 @@ open class MainApp : Application() {
             )
             modules(appComponent)
         }
+
+        // Observe and apply language changes reactively
+        languageWrapper.observeAndApplyLanguage()
 
         initializers.init(this)
     }

@@ -13,7 +13,6 @@ dependencyResolutionManagement {
     }
 }
 include(":presentation")
-include(":data")
 include(":app")
 include(":shared")
 project(":shared").projectDir = file("shared/shared")
